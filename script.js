@@ -5,7 +5,9 @@ const dialogClose = document.getElementById('dialog-close');
 
 document.querySelectorAll('.image-open').forEach((button) => {
   button.addEventListener('click', () => {
-    dialogImage.src = button.dataset.image;
+    const sourceImage = button.closest('.serp-card, figure')?.querySelector('img');
+    if (!sourceImage) return;
+    dialogImage.src = sourceImage.currentSrc || sourceImage.src;
     dialogImage.alt = button.dataset.caption || 'Captura ampliada';
     dialogCaption.textContent = button.dataset.caption || 'Captura ampliada';
     dialog.showModal();
